@@ -12,7 +12,7 @@ class LocationItem extends PureComponent {
 
     _handlePress = async () => {
         const res = await this.props.fetchDetails(this.props.place_id);
-       // console.log(JSON.stringify(res));
+        //console.log(JSON.stringify(res));
         this.setState({
             response: res
         })

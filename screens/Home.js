@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, ImageBackground, TextInput, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, ImageBackground, TextInput, ScrollView, Button, ActivityIndicator} from 'react-native';
 import PlaceInput from "../components/PlaceInput"
+import API from '../config/api'
+import axios from  'axios';
 
 export default class Home extends Component {
     render() {
@@ -12,9 +14,11 @@ export default class Home extends Component {
                 />
                 <View style={styles.body}>
                     <PlaceInput/>
-
+                    <Button
+                        title="Press me"
+                        onPress={this.getfetch}
+                    />
                 </View>
-
                 <View style={styles.footer}>
                     <Text>Footer</Text>
                 </View>
@@ -23,7 +27,27 @@ export default class Home extends Component {
 
         );
     }
+    getfetch = () => {
+        return fetch('https://gdziezjemapi.azurewebsites.net/api/city',{
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+
+                console.log(responseJson);
+
+            })
+            .catch((error) =>{
+                console.log(error);
+            });
+    }
+
 }
+
 
 const styles = StyleSheet.create({
     container: {
